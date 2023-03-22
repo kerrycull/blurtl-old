@@ -41,7 +41,7 @@ function LatestArticles() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  });
+  }, []);
 
   const articleGrabber = () => {
     console.log("fetching articles");
@@ -87,7 +87,6 @@ function LatestArticles() {
         console.log("calling addPost");
         addPost({
           id: post.news_id,
-          docId: post.docId,
           title: post.title,
           excerpt: post.text,
           link: post.news_url,
@@ -97,7 +96,7 @@ function LatestArticles() {
         });
       }
     });
-  }, [newPosts]);
+  }, [newPosts, addPost, posts]);
 
   return (
     <div className="article-container">
