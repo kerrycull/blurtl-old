@@ -15,33 +15,36 @@ function LatestArticles() {
   const [newPosts, setNewPosts] = useState([]);
   const [postDisplay, setPostDisplay] = useState([]);
 
-  const addPost = useCallback(async (thePost) => {
-    if (posts.find((post) => post.id === thePost.id)) {
-      console.log("already exists");
-      return;
-    }
-    if (thePost.id === undefined) {
-      console.log("postId is undefined");
-      return;
-    }
-    try {
-      console.log("id not found, adding to db");
-      const docRef = await addDoc(collection(db, "posts"), {
-        id: thePost.id,
-        title: thePost.title,
-        excerpt: thePost.excerpt,
-        link: thePost.link,
-        docId: null,
-        upvotes: thePost.upvotes,
-        downvotes: thePost.downvotes,
-      });
-      const docRef2 = doc(db, `posts/${docRef.id}`);
-      await updateDoc(docRef2, { docId: docRef.id });
-      //console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }, []);
+  const addPost = useCallback(
+    async (thePost) => {
+      if (posts.find((post) => post.id === thePost.id)) {
+        console.log("already exists");
+        return;
+      }
+      if (thePost.id === undefined) {
+        console.log("postId is undefined");
+        return;
+      }
+      try {
+        console.log("id not found, adding to db");
+        const docRef = await addDoc(collection(db, "posts"), {
+          id: thePost.id,
+          title: thePost.title,
+          excerpt: thePost.excerpt,
+          link: thePost.link,
+          docId: null,
+          upvotes: thePost.upvotes,
+          downvotes: thePost.downvotes,
+        });
+        const docRef2 = doc(db, `posts/${docRef.id}`);
+        await updateDoc(docRef2, { docId: docRef.id });
+        //console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    },
+    [posts]
+  );
 
   const articleGrabber = () => {
     console.log("fetching articles");
