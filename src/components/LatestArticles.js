@@ -9,8 +9,10 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useKeepAwake } from "@sayem314/react-native-keep-awake";
 
 function LatestArticles() {
+  useKeepAwake();
   const [posts, setPosts] = useState([]);
   const [newPosts, setNewPosts] = useState([]);
   const [postDisplay, setPostDisplay] = useState([]);
@@ -78,7 +80,7 @@ function LatestArticles() {
     console.log("articleGrabber");
     const intervalId = setInterval(() => {
       articleGrabber();
-    }, 18000);
+    }, 180000);
 
     return () => clearInterval(intervalId);
   }, []);
