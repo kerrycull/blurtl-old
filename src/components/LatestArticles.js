@@ -27,6 +27,10 @@ function LatestArticles() {
         console.log("postId is undefined");
         return;
       }
+      if (thePost.link.includes("youtube")) {
+        console.log("youtube link");
+        return;
+      }
       try {
         console.log("id not found, adding to db");
         const docRef = await addDoc(collection(db, "posts"), {
@@ -83,7 +87,7 @@ function LatestArticles() {
     }, 180000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [articleGrabber]);
 
   useEffect(() => {
     //console.log(posts);
