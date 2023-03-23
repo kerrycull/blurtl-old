@@ -94,3 +94,8 @@ button {
 .link:hover {
   color: #005f8b;
 }
+
+.dateStamp {
+  color: rgb(164, 164, 164);
+  margin: 0px;
+}

@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useKeepAwake } from "@sayem314/react-native-keep-awake";
+import e from "cors";
 
 function LatestArticles() {
   useKeepAwake();
@@ -41,6 +42,7 @@ function LatestArticles() {
           docId: null,
           upvotes: thePost.upvotes,
           downvotes: thePost.downvotes,
+          date: thePost.date,
         });
         const docRef2 = doc(db, `posts/${docRef.id}`);
         await updateDoc(docRef2, { docId: docRef.id });
@@ -53,13 +55,14 @@ function LatestArticles() {
   );
 
   const articleGrabber = () => {
-    console.log("fetching articles");
+    //console.log("fetching articles");
     fetch(
       "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
     )
       .then((response) => response.json())
       .then((data) => {
         setNewPosts(data.data);
+        //console.log(newPosts[0].news_id);
       })
       .catch((error) => console.log("Authorization failed: " + error.message));
   };
@@ -81,7 +84,7 @@ function LatestArticles() {
   }, [newPosts]);
 
   useEffect(() => {
-    console.log("articleGrabber");
+    //console.log("articleGrabber");
     const intervalId = setInterval(() => {
       articleGrabber();
     }, 180000);
@@ -90,9 +93,8 @@ function LatestArticles() {
   }, []);
 
   useEffect(() => {
-    //console.log(posts);
     newPosts.forEach((post) => {
-      if (!posts.find((p) => p.id === post.id)) {
+      if (!posts.find((p) => p.id === post.news_id)) {
         console.log("calling addPost");
         addPost({
           id: post.news_id,
@@ -102,6 +104,7 @@ function LatestArticles() {
           docId: null,
           upvotes: 0,
           downvotes: 0,
+          date: post.date,
         });
       }
     });
