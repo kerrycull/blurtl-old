@@ -54,13 +54,13 @@ function LatestArticles() {
   );
 
   const articleGrabber = () => {
-    //console.log("fetching articles");
-    fetch();
-    "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
+    console.log("fetching articles");
+    fetch(
+      "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
+    )
       .then((response) => response.json())
       .then((data) => {
         setNewPosts(data.data);
-        //console.log(newPosts[0].news_id);
       })
       .catch((error) => console.log("Authorization failed: " + error.message));
   };
