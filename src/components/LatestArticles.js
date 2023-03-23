@@ -9,8 +9,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { useKeepAwake } from "@sayem314/react-native-keep-awake";
-import e from "cors";
+import { useKeepAwake } from "@sayem314/react-native-keep-awake";\
 
 function LatestArticles() {
   useKeepAwake();
