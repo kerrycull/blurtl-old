@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Article.css";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -23,14 +23,16 @@ function Article({ post }) {
     }
   }
 
-  //  function timeAgo(dateString) {
-  //    const date = new Date(dateString);
-  //    const now = new Date();
-  //    const diffMs = now - date;
-  //    const diffMins = Math.floor(diffMs / 60000);
-  //    return diffMins + " minutes ago";
-  //  }
-  //
+  function timeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    return diffMins + " minutes ago";
+  }
+
+  const newDate = timeAgo(post.date);
+
   const excerpt7 = shortenString(excerpt6, length);
 
   const [upvotes, setUpvotes] = useState(post.upvotes || 0);
@@ -61,11 +63,24 @@ function Article({ post }) {
 
   //console.log("test");
 
+  const [timeAgoStr, setTimeAgoStr] = useState("");
+
+  useEffect(() => {
+    // Update the time every minute
+    const intervalId = setInterval(() => {
+      const newTimeAgoStr = timeAgo(post.date);
+      setTimeAgoStr(newTimeAgoStr);
+    }, 60000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [post.date]);
+
   return (
     <div className="articleBox">
       <div className="article">
         <h3 className="title">{title}</h3>
-        <p className="dateStamp">{post.date}</p>
+        <p className="dateStamp"> {newDate}</p>
         <p className="excerpt">{excerpt7}</p>
         <a href={post.link} className="link">
           Full article
