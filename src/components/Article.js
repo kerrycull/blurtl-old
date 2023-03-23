@@ -80,7 +80,7 @@ function Article({ post }) {
     <div className="articleBox">
       <div className="article">
         <h3 className="title">{title}</h3>
-        <p className="dateStamp"> {newDate}</p>
+        <p className="dateStamp"> {timeAgoStr}</p>
         <p className="excerpt">{excerpt7}</p>
         <a href={post.link} className="link">
           Full article
