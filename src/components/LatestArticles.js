@@ -87,7 +87,7 @@ function LatestArticles() {
     }, 180000);
 
     return () => clearInterval(intervalId);
-  }, [articleGrabber]);
+  }, []);
 
   useEffect(() => {
     //console.log(posts);
