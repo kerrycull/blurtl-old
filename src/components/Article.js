@@ -31,8 +31,6 @@ function Article({ post }) {
     return diffMins + " minutes ago";
   }
 
-  const newDate = timeAgo(post.date);
-
   const excerpt7 = shortenString(excerpt6, length);
 
   const [upvotes, setUpvotes] = useState(post.upvotes || 0);
