@@ -82,7 +82,7 @@ function LatestArticles() {
     });
 
     return unsubscribe;
-  }, [posts]);
+  }, [newPosts]);
 
   useEffect(() => {
     //console.log("articleGrabber");
