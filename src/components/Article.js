@@ -23,21 +23,12 @@ function Article({ post }) {
     }
   }
 
-  function timeAgo(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now - date;
-    const diffMins = Math.floor(diffMs / 60000);
-    return diffMins + " minutes ago";
-  }
-
   const excerpt7 = shortenString(excerpt6, length);
 
   const [upvotes, setUpvotes] = useState(post.upvotes || 0);
   const [downvotes, setDownvotes] = useState(post.downvotes || 0);
 
   const handleUpvote = async () => {
-    //console.log(post.docId); // Check if post is defined
     const newUpvotes = upvotes + 1;
     setUpvotes(newUpvotes);
     const docRef = doc(db, `posts/${post.docId}`);
@@ -50,7 +41,6 @@ function Article({ post }) {
   };
 
   const handleDownvote = async () => {
-    //console.log(post); // Check if post is defined
     const newDownvotes = downvotes + 1;
     setDownvotes(newDownvotes);
     const docRef = doc(db, `posts/${post.docId}`);
@@ -59,9 +49,15 @@ function Article({ post }) {
 
   const score = upvotes - downvotes;
 
-  //console.log("test");
+  const [timeAgoStr, setTimeAgoStr] = useState(timeAgo(post.date));
 
-  const [timeAgoStr, setTimeAgoStr] = useState("");
+  function timeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    return diffMins + " minutes ago";
+  }
 
   useEffect(() => {
     // Update the time every minute
@@ -78,7 +74,7 @@ function Article({ post }) {
     <div className="articleBox">
       <div className="article">
         <h3 className="title">{title}</h3>
-        <p className="dateStamp"> {timeAgoStr}</p>
+        <p className="dateStamp"> {newTime}</p>
         <p className="excerpt">{excerpt7}</p>
         <a href={post.link} className="link">
           Full article
