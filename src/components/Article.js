@@ -56,7 +56,12 @@ function Article({ post }) {
     const now = new Date();
     const diffMs = now - date;
     const diffMins = Math.floor(diffMs / 60000);
-    return diffMins + " minutes ago";
+
+    if (diffMins < 1) {
+      return "just now";
+    } else {
+      return diffMins + " minutes ago";
+    }
   }
 
   useEffect(() => {
@@ -74,7 +79,7 @@ function Article({ post }) {
     <div className="articleBox">
       <div className="article">
         <h3 className="title">{title}</h3>
-        <p className="dateStamp"> {newTime}</p>
+        <p className="dateStamp"> {timeAgoStr}</p>
         <p className="excerpt">{excerpt7}</p>
         <a href={post.link} className="link">
           Full article
