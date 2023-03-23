@@ -23,16 +23,14 @@ function Article({ post }) {
     }
   }
 
-  function timeAgo(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now - date;
-    const diffMins = Math.floor(diffMs / 60000);
-    return diffMins + " minutes ago";
-  }
-
-  const newDate = timeAgo(post.dateString);
-
+  //  function timeAgo(dateString) {
+  //    const date = new Date(dateString);
+  //    const now = new Date();
+  //    const diffMs = now - date;
+  //    const diffMins = Math.floor(diffMs / 60000);
+  //    return diffMins + " minutes ago";
+  //  }
+  //
   const excerpt7 = shortenString(excerpt6, length);
 
   const [upvotes, setUpvotes] = useState(post.upvotes || 0);
