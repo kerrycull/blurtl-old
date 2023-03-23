@@ -19,7 +19,10 @@ function LatestArticles() {
 
   const addPost = useCallback(
     async (thePost) => {
-      if (posts.find((post) => post.id === thePost.id)) {
+      if (
+        posts.find((post) => post.id === thePost.id) ||
+        newPosts.find((post) => post.news_id === thePost.id)
+      ) {
         console.log("already exists");
         return;
       }
@@ -79,7 +82,7 @@ function LatestArticles() {
     });
 
     return unsubscribe;
-  }, [newPosts]);
+  }, [posts]);
 
   useEffect(() => {
     //console.log("articleGrabber");
@@ -93,7 +96,7 @@ function LatestArticles() {
   useEffect(() => {
     newPosts.forEach((post) => {
       if (!posts.find((p) => p.id === post.news_id)) {
-        console.log("calling addPost");
+        console.log("calling addPost" + post.news_id);
         addPost({
           id: post.news_id,
           title: post.title,
