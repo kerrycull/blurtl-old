@@ -17,7 +17,7 @@ function LatestArticles() {
   const [newPosts, setNewPosts] = useState([]);
   const [postDisplay, setPostDisplay] = useState([]);
 
-  const addPost = useCallback(async (thePost) => {
+  const addPost = async (thePost) => {
     if (
       posts.find((post) => post.id === thePost.id) &&
       newPosts.find((post) => post.news_id === thePost.id)
@@ -51,7 +51,7 @@ function LatestArticles() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }, []);
+  };
 
   const articleGrabber = () => {
     console.log("fetching articles");
