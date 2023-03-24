@@ -87,9 +87,9 @@ function Article({ post }) {
         </a>
       </div>
       <div className="score-container">
-        <button onClick={handleUpvote}>Upvote</button>
+        <button onClick={handleUpvote}>↑</button>
         <span className="score">{score}</span>
-        <button onClick={handleDownvote}>Downvote</button>
+        <button onClick={handleDownvote}>↓</button>
       </div>
     </div>
   );
