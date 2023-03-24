@@ -20,7 +20,7 @@ function LatestArticles() {
   const addPost = useCallback(
     async (thePost) => {
       if (
-        posts.find((post) => post.id === thePost.id) ||
+        posts.find((post) => post.id === thePost.id) &&
         newPosts.find((post) => post.news_id === thePost.id)
       ) {
         console.log("already exists");
