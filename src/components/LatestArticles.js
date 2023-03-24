@@ -121,7 +121,7 @@ function LatestArticles() {
         date: post.date,
       });
     });
-  }, [newPosts, addPost, posts]);
+  }, [newPosts, addPost]);
 
   return (
     <div className="article-container">
