@@ -55,7 +55,7 @@ function LatestArticles() {
         console.error("Error adding document: ", e);
       }
     },
-    [posts, newPosts]
+    [posts]
   );
 
   // SNAPSHOT AND DISPLAY POSTS FROM DB
