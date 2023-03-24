@@ -11,16 +11,6 @@ import {
 import { db } from "../firebase";
 import { useKeepAwake } from "@sayem314/react-native-keep-awake";
 
-const articleGrabber = () => {
-  console.log("fetching articles");
-  return fetch(
-    "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
-  )
-    .then((response) => response.json())
-    .then((data) => data.data)
-    .catch((error) => console.log("Authorization failed: " + error.message));
-};
-
 function LatestArticles() {
   useKeepAwake();
   const [posts, setPosts] = useState([]);
@@ -82,11 +72,23 @@ function LatestArticles() {
   useEffect(() => {
     //console.log("articleGrabber");
     const intervalId = setInterval(() => {
-      articleGrabber();
+      fetch(
+        "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const filteredData = data.data.filter(
+            (post) => !posts.find((p) => p.id === post.news_id)
+          );
+          setNewPosts(filteredData);
+        })
+        .catch((error) =>
+          console.log("Authorization failed: " + error.message)
+        );
     }, 180000);
 
     return () => clearInterval(intervalId);
-  }, [articleGrabber]);
+  }, []);
 
   useEffect(() => {
     newPosts.forEach((post) => {
