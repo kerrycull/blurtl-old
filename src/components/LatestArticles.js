@@ -80,7 +80,7 @@ function LatestArticles() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [newPosts]);
 
   useEffect(() => {
     //console.log("articleGrabber");
