@@ -60,6 +60,7 @@ function LatestArticles() {
     )
       .then((response) => response.json())
       .then((data) => {
+        setNewPosts([]); // Clear newPosts before adding new posts
         setNewPosts(data.data);
       })
       .catch((error) => console.log("Authorization failed: " + error.message));
