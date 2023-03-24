@@ -63,7 +63,9 @@ function Article({ post }) {
       return "just now";
     } else if (diffMins < 60) {
       return diffMins + " minutes ago";
-    } else if (diffHours < 24) {
+    } else if (diffHours === 1) {
+      return "1 hour ago";
+    } else if (diffHours > 1 && diffHours < 24) {
       return diffHours + " hours ago";
     } else {
       return diffDays + " days ago";

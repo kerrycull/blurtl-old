@@ -7,12 +7,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCA-FPYTRx6qiTfad7ZLZbgtmc2Otb-SFo",
-  authDomain: "test2-47cb2.firebaseapp.com",
-  projectId: "test2-47cb2",
-  storageBucket: "test2-47cb2.appspot.com",
-  messagingSenderId: "269431445201",
-  appId: "1:269431445201:web:8769d209dbed7ead0097f0",
+  apiKey: "AIzaSyAwxJHyOLNfikS4AxK70fg-Astt1vi5_0Q",
+  authDomain: "blurtl.firebaseapp.com",
+  databaseURL: "https://blurtl-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "blurtl",
+  storageBucket: "blurtl.appspot.com",
+  messagingSenderId: "9162363109",
+  appId: "1:9162363109:web:1c1b5d4a8cfadd19ae040c",
 };
 
 // Initialize Firebase
