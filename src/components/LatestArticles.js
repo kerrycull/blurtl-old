@@ -51,6 +51,8 @@ function LatestArticles() {
         const docRef2 = doc(db, `posts/${docRef.id}`);
         await updateDoc(docRef2, { docId: docRef.id });
         //console.log("Document written with ID: ", docRef.id);
+        setPosts([...posts, thePost]);
+        setPostDisplay([...posts.slice(0, 10)]);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -69,7 +71,7 @@ function LatestArticles() {
           postSnap.push(doc.data());
         });
         setPosts(postSnap);
-        setPostDisplay(postSnap.slice(0, 10)); // get the 10 most recent posts
+        setPostDisplay([...postSnap.slice(0, 10)]); // get the 10 most recent posts
       }
     );
 

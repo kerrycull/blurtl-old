@@ -55,6 +55,7 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
 }
 
 button {
