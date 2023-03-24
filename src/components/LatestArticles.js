@@ -109,7 +109,6 @@ function LatestArticles() {
         });
       }
     });
-    setNewPosts([]);
   }, [newPosts, addPost, posts]);
 
   return (
