@@ -51,7 +51,7 @@ function LatestArticles() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  });
+  }, []);
 
   const articleGrabber = () => {
     console.log("fetching articles");
