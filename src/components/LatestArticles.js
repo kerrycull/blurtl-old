@@ -50,7 +50,7 @@ function LatestArticles() {
         console.error("Error adding document: ", e);
       }
     },
-    [posts, newPosts]
+    [posts]
   );
 
   const articleGrabber = () => {
