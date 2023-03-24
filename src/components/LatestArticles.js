@@ -88,7 +88,7 @@ function LatestArticles() {
     }, 180000);
 
     return () => clearInterval(intervalId);
-  }, [posts);
+  }, [posts]);
 
   useEffect(() => {
     newPosts.forEach((post) => {
