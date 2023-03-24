@@ -19,10 +19,7 @@ function LatestArticles() {
 
   const addPost = useCallback(
     async (thePost) => {
-      if (
-        posts.find((post) => post.id === thePost.id) &&
-        newPosts.find((post) => post.news_id === thePost.id)
-      ) {
+      if (posts.find((post) => post.id === thePost.id)) {
         console.log("already exists");
         return;
       }
@@ -70,7 +67,7 @@ function LatestArticles() {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "posts"), (querySnapshot) => {
-      console.log("grabbbing snapshot");
+      console.log("grabbbing snapshot" + newPosts);
       const postSnap = [];
       querySnapshot.forEach((doc) => {
         postSnap.push(doc.data());
