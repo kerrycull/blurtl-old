@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Article from "./Article";
 import "../Article.css";
 import {
@@ -106,7 +106,7 @@ function LatestArticles() {
         });
       }
     });
-  }, [newPosts, addPost, posts]);
+  }, [newPosts, posts]);
 
   return (
     <div className="article-container">
