@@ -76,7 +76,7 @@ function LatestArticles() {
     );
 
     return unsubscribe;
-  }, [newPosts]);
+  }, [posts]);
 
   // GRAB NEW POSTS FROM API
   useEffect(() => {
@@ -121,7 +121,7 @@ function LatestArticles() {
         date: post.date,
       });
     });
-  }, [newPosts, addPost]);
+  }, [newPosts, addPost, posts]);
 
   return (
     <div className="article-container">
