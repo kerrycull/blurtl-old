@@ -4,17 +4,6 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 function Article({ post }) {
-  const length = 200;
-
-  const title = post.title.replaceAll("&#8217;", "'");
-
-  const excerpt = post.excerpt.replaceAll("<p>", "");
-  const excerpt2 = excerpt.replaceAll("</p>", "");
-  const excerpt3 = excerpt2.replaceAll("&#8216;", "'");
-  const excerpt4 = excerpt3.replaceAll("&#8217;", "'");
-  const excerpt5 = excerpt4.replaceAll("[&hellip;]", "...");
-  const excerpt6 = excerpt5.replaceAll("&#8211;", "...");
-
   function shortenString(str, length) {
     if (str.length > 200) {
       return str.substring(0, length - 3) + "...";
@@ -23,11 +12,13 @@ function Article({ post }) {
     }
   }
 
-  const excerpt7 = shortenString(excerpt6, length);
+  const length = 200;
+  const excerpt = shortenString(post.excerpt, length);
 
   const [upvotes, setUpvotes] = useState(post.upvotes || 0);
   const [downvotes, setDownvotes] = useState(post.downvotes || 0);
 
+  // HANDLE UPVOTE
   const handleUpvote = async () => {
     const newUpvotes = upvotes + 1;
     setUpvotes(newUpvotes);
@@ -40,6 +31,7 @@ function Article({ post }) {
     }
   };
 
+  // HANDLE DOWNVOTE
   const handleDownvote = async () => {
     const newDownvotes = downvotes + 1;
     setDownvotes(newDownvotes);
@@ -51,6 +43,7 @@ function Article({ post }) {
 
   const [timeAgoStr, setTimeAgoStr] = useState(timeAgo(post.date));
 
+  // FUNCTION TO CALCULATE TIME ARTICLE WAS POSTED
   function timeAgo(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -86,9 +79,9 @@ function Article({ post }) {
   return (
     <div className="articleBox">
       <div className="article">
-        <h3 className="title">{title}</h3>
+        <h3 className="title">{post.title}</h3>
         <p className="dateStamp"> {timeAgoStr}</p>
-        <p className="excerpt">{excerpt7}</p>
+        <p className="excerpt">{excerpt}</p>
         <a href={post.link} className="link">
           Full article
         </a>

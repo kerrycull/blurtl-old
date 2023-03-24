@@ -7,6 +7,9 @@ import {
   onSnapshot,
   updateDoc,
   doc,
+  query,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useKeepAwake } from "@sayem314/react-native-keep-awake";
@@ -17,8 +20,10 @@ function LatestArticles() {
   const [newPosts, setNewPosts] = useState([]);
   const [postDisplay, setPostDisplay] = useState([]);
 
+  // ADD POST TO DB
   const addPost = useCallback(
     async (thePost) => {
+      console.log("adding post");
       if (posts.find((post) => post.id === thePost.id)) {
         console.log("already exists");
         return;
@@ -27,7 +32,7 @@ function LatestArticles() {
         console.log("postId is undefined");
         return;
       }
-      if (thePost.link.includes("youtube")) {
+      if (thePost.link.includes("youtube.com")) {
         console.log("youtube link");
         return;
       }
@@ -50,37 +55,37 @@ function LatestArticles() {
         console.error("Error adding document: ", e);
       }
     },
-    [posts]
+    [posts, newPosts]
   );
 
+  // SNAPSHOT AND DISPLAY POSTS FROM DB
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "posts"), (querySnapshot) => {
-      console.log("grabbbing snapshot" + newPosts);
-      const postSnap = [];
-      querySnapshot.forEach((doc) => {
-        postSnap.push(doc.data());
-      });
-      setPosts(postSnap);
-      postSnap.sort((a, b) => b.id - a.id); // sort by id in descending order
-      setPostDisplay(postSnap.slice(0, 10)); // get the 10 most recent posts
-      //console.log(posts);
-    });
+    const unsubscribe = onSnapshot(
+      query(collection(db, "posts"), orderBy("id", "desc"), limit(50)),
+      (querySnapshot) => {
+        console.log("grabbbing snapshot");
+        const postSnap = [];
+        querySnapshot.forEach((doc) => {
+          postSnap.push(doc.data());
+        });
+        setPosts(postSnap);
+        setPostDisplay(postSnap.slice(0, 10)); // get the 10 most recent posts
+      }
+    );
 
     return unsubscribe;
   }, [newPosts]);
 
+  // GRAB NEW POSTS FROM API
   useEffect(() => {
-    //console.log("articleGrabber");
+    console.log("articleGrabber");
     const intervalId = setInterval(() => {
       fetch(
         "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
       )
         .then((response) => response.json())
         .then((data) => {
-          const filteredData = data.data.filter(
-            (post) => !posts.find((p) => p.id === post.news_id)
-          );
-          setNewPosts(filteredData);
+          setNewPosts(data.data);
         })
         .catch((error) =>
           console.log("Authorization failed: " + error.message)
@@ -88,23 +93,31 @@ function LatestArticles() {
     }, 180000);
 
     return () => clearInterval(intervalId);
-  }, [posts]);
+  }, []);
 
   useEffect(() => {
-    newPosts.forEach((post) => {
-      if (!posts.find((p) => p.id === post.news_id)) {
-        console.log("calling addPost" + post.news_id);
-        addPost({
-          id: post.news_id,
-          title: post.title,
-          excerpt: post.text,
-          link: post.news_url,
-          docId: null,
-          upvotes: 0,
-          downvotes: 0,
-          date: post.date,
-        });
-      }
+    if (newPosts.length === 0) {
+      console.log("no new posts");
+      return;
+    }
+
+    // Filter out the posts that already exist in the database
+    const filteredData = newPosts.filter(
+      (post) => !posts.find((p) => p.id === post.news_id)
+    );
+
+    // Add the new posts to the database
+    filteredData.forEach((post) => {
+      addPost({
+        id: post.news_id,
+        title: post.title,
+        excerpt: post.text,
+        link: post.news_url,
+        docId: null,
+        upvotes: 0,
+        downvotes: 0,
+        date: post.date,
+      });
     });
   }, [newPosts, addPost, posts]);
 
