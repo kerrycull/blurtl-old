@@ -60,8 +60,10 @@ function LatestArticles() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setNewPosts([]); // Clear newPosts before adding new posts
-        setNewPosts(data.data);
+        const filteredData = data.data.filter(
+          (post) => !posts.find((p) => p.id === post.news_id)
+        );
+        setNewPosts(filteredData);
       })
       .catch((error) => console.log("Authorization failed: " + error.message));
   };
