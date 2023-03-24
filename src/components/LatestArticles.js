@@ -53,22 +53,17 @@ function LatestArticles() {
     [posts]
   );
 
-  const articleGrabber = async () => {
+  const articleGrabber = () => {
     console.log("fetching articles");
-    const latestPost = posts.length > 0 ? posts[0] : null; // Get the latest post from your database
-    const url = latestPost
-      ? `https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv&min-id=${
-          latestPost.id + 1
-        }`
-      : "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setNewPosts([]); // Clear newPosts before adding new posts
-      setNewPosts(data.data);
-    } catch (error) {
-      console.log("Authorization failed: " + error.message);
-    }
+    fetch(
+      "https://cryptonews-api.com/api/v1/category?section=general&items=50&extra-fields=id&page=1&token=5ouww0nypihcbvkubvklapfqvqwh4d3ibeniydyv"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setNewPosts([]); // Clear newPosts before adding new posts
+        setNewPosts(data.data);
+      })
+      .catch((error) => console.log("Authorization failed: " + error.message));
   };
 
   useEffect(() => {
