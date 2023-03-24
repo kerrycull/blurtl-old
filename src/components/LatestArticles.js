@@ -53,7 +53,7 @@ function LatestArticles() {
         console.error("Error adding document: ", e);
       }
     },
-    [posts]
+    [newPosts]
   );
 
   const articleGrabber = () => {
