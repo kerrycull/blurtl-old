@@ -14,44 +14,6 @@ import {
 import { db } from "../firebase";
 import { useKeepAwake } from "@sayem314/react-native-keep-awake";
 
-const processNewPosts = (
-  newPosts,
-  posts,
-  addPost,
-  setPostDisplay,
-  setNewPosts
-) => {
-  console.log("processNewPosts");
-  if (newPosts.length === 0) {
-    console.log("no new posts");
-    return;
-  }
-
-  // Add the new posts to the database
-  for (const post of newPosts) {
-    if (posts.find((p) => p.id === post.news_id)) {
-      console.log("postId found" + post.news_id);
-      continue;
-    } else {
-      console.log("postId not found" + post.news_id);
-      addPost({
-        id: post.news_id,
-        title: post.title,
-        excerpt: post.text,
-        link: post.news_url,
-        docId: null,
-        upvotes: 0,
-        downvotes: 0,
-        date: post.date,
-      });
-      continue;
-    }
-  }
-  // Clear the new posts array
-  setPostDisplay(posts.slice(0, 10));
-  setNewPosts([]);
-};
-
 function LatestArticles() {
   useKeepAwake();
   const [posts, setPosts] = useState([]);
@@ -98,7 +60,7 @@ function LatestArticles() {
   }, []);
 
   useEffect(() => {
-    processNewPosts(newPosts, posts, addPost, setPostDisplay, setNewPosts);
+    processNewPosts();
   }, [newPosts]);
 
   useEffect(() => {
@@ -135,6 +97,38 @@ function LatestArticles() {
       return;
     }
   }, []);
+
+  const processNewPosts = () => {
+    console.log("processNewPosts");
+    if (newPosts.length === 0) {
+      console.log("no new posts");
+      return;
+    }
+
+    // Add the new posts to the database
+    for (const post of newPosts) {
+      if (posts.find((p) => p.id === post.news_id)) {
+        console.log("postId found" + post.news_id);
+        continue;
+      } else {
+        console.log("postId not found" + post.news_id);
+        addPost({
+          id: post.news_id,
+          title: post.title,
+          excerpt: post.text,
+          link: post.news_url,
+          docId: null,
+          upvotes: 0,
+          downvotes: 0,
+          date: post.date,
+        });
+        continue;
+      }
+    }
+    // Clear the new posts array
+    setPostDisplay(posts.slice(0, 10));
+    setNewPosts([]);
+  };
 
   return (
     <div className="article-container">
