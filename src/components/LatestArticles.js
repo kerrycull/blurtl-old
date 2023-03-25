@@ -61,6 +61,7 @@ function LatestArticles() {
 
   useEffect(() => {
     processNewPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPosts]);
 
   useEffect(() => {
@@ -96,6 +97,7 @@ function LatestArticles() {
       console.error("Error adding document: ", e);
       return;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const processNewPosts = () => {
