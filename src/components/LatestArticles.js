@@ -30,7 +30,7 @@ function LatestArticles() {
         querySnapshot.forEach((doc) => {
           postSnap.push(doc.data());
         });
-        setPosts(...posts, ...postSnap);
+        setPosts((prevPosts) => [...prevPosts, ...postSnap]);
         setPostDisplay([...postSnap.slice(0, 10)]);
       }
     );
