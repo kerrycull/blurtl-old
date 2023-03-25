@@ -54,7 +54,7 @@ function LatestArticles() {
         .catch((error) =>
           console.log("Authorization failed: " + error.message)
         );
-    }, 10000);
+    }, 180000);
 
     return () => clearInterval(intervalId);
   }, []);
