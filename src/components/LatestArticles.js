@@ -22,6 +22,7 @@ function LatestArticles() {
 
   // SNAPSHOT AND DISPLAY POSTS FROM DB
   useEffect(() => {
+    setPosts([]);
     const unsubscribe = onSnapshot(
       query(collection(db, "posts"), orderBy("id", "desc"), limit(50)),
       (querySnapshot) => {
@@ -30,8 +31,9 @@ function LatestArticles() {
         querySnapshot.forEach((doc) => {
           postSnap.push(doc.data());
         });
-        setPosts((prevPosts) => [...prevPosts, ...postSnap]);
-        setPostDisplay([...postSnap.slice(0, 10)]);
+        //console.log(postSnap);
+        setPosts(postSnap);
+        setPostDisplay(postSnap.slice(0, 10));
       }
     );
 
@@ -48,98 +50,85 @@ function LatestArticles() {
         .then((response) => response.json())
         .then((data) => {
           setNewPosts(data.data);
-          console.log("setNewPosts");
         })
         .catch((error) =>
           console.log("Authorization failed: " + error.message)
         );
-    }, 180000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   }, []);
 
-  // ADD POST TO DB
-  const addPost = useCallback(
-    async (thePost) => {
-      console.log("adding post");
-      console.log(thePost);
-      if (posts.find((post) => post.id === thePost.id)) {
-        console.log("already exists");
-        return false;
-      }
-      if (thePost.id === undefined) {
-        console.log("postId is undefined");
-        return false;
-      }
-      if (thePost.link.includes("youtube.com")) {
-        console.log("youtube link");
-        return false;
-      }
-      try {
-        //console.log("id not found, adding to db");
-        const docRef = await addDoc(collection(db, "posts"), {
-          id: thePost.id,
-          title: thePost.title,
-          excerpt: thePost.excerpt,
-          link: thePost.link,
-          docId: null,
-          upvotes: thePost.upvotes,
-          downvotes: thePost.downvotes,
-          date: thePost.date,
-        });
-        const docRef2 = doc(db, `posts/${docRef.id}`);
-        await updateDoc(docRef2, { docId: docRef.id });
-        //console.log("Document written with ID: ", docRef.id);
-        setPosts([...posts, thePost]);
-        setPostDisplay([...posts.slice(0, 10)]);
-        return true;
-      } catch (e) {
-        console.error("Error adding document: ", e);
-        return false;
-      }
-    },
-    [posts]
-  );
+  useEffect(() => {
+    processNewPosts();
+  }, [newPosts]);
 
   useEffect(() => {
-    console.log("processing new posts" + newPosts.length);
+    console.log(posts);
+    setPostDisplay(posts.slice(0, 10));
+  }, [posts]);
 
-    const processNewPosts = async () => {
-      if (newPosts.length === 0) {
-        console.log("no new posts");
-        return;
+  // ADD POST TO DB
+  const addPost = useCallback(async (thePost) => {
+    console.log("adding post" + thePost.id);
+    if (posts.find((post) => post.id === thePost.id)) {
+      console.log("already exists");
+      return;
+    }
+    try {
+      //console.log("id not found, adding to db");
+      const docRef = await addDoc(collection(db, "posts"), {
+        id: thePost.id,
+        title: thePost.title,
+        excerpt: thePost.excerpt,
+        link: thePost.link,
+        docId: null,
+        upvotes: thePost.upvotes,
+        downvotes: thePost.downvotes,
+        date: thePost.date,
+      });
+      const docRef2 = doc(db, `posts/${docRef.id}`);
+      await updateDoc(docRef2, { docId: docRef.id });
+      //console.log("Document written with ID: ", docRef.id);
+      //setPosts((posts) => [thePost, ...posts]);
+      return;
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      return;
+    }
+  });
+
+  const processNewPosts = () => {
+    console.log("processNewPosts");
+    if (newPosts.length === 0) {
+      console.log("no new posts");
+      return;
+    }
+
+    // Add the new posts to the database
+    for (const post of newPosts) {
+      if (posts.find((p) => p.id === post.news_id)) {
+        console.log("postId found" + post.news_id);
+        continue;
+      } else {
+        console.log("postId not found" + post.news_id);
+        addPost({
+          id: post.news_id,
+          title: post.title,
+          excerpt: post.text,
+          link: post.news_url,
+          docId: null,
+          upvotes: 0,
+          downvotes: 0,
+          date: post.date,
+        });
+        continue;
       }
-
-      // Add the new posts to the database
-      for (const post of newPosts) {
-        if (!posts.find((p) => p.id === post.news_id)) {
-          console.log("postId not found" + post.news_id);
-          await addPost({
-            id: post.news_id,
-            title: post.title,
-            excerpt: post.text,
-            link: post.news_url,
-            docId: null,
-            upvotes: 0,
-            downvotes: 0,
-            date: post.date,
-          });
-        } else {
-          console.log("postId found" + post.news_id);
-          continue;
-        }
-      }
-
-      // Update the displayed posts
-      setPosts([...posts, newPosts]);
-      setPostDisplay([...posts.slice(0, 10)]);
-
-      // Clear the new posts array
-      setNewPosts([]);
-    };
-
-    processNewPosts();
-  }, [newPosts, addPost, posts]);
+    }
+    // Clear the new posts array
+    setPostDisplay(posts.slice(0, 10));
+    setNewPosts([]);
+  };
 
   return (
     <div className="article-container">
