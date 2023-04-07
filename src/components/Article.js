@@ -51,9 +51,7 @@ function Article({ post }) {
   const handleUpvote = async () => {
     try {
       await axios
-        .get(
-          `https://powerful-scrubland-88120.herokuapp.com:4000/api/data/${post.news_id}/upvote`
-        )
+        .get(`/api/data/${post.news_id}/upvote`)
         .then((response) => console.log(response));
       setUpvotes(upvotes + 1); // Update the upvotes state locally
     } catch (error) {
@@ -64,9 +62,7 @@ function Article({ post }) {
   const handleDownvote = async () => {
     try {
       await axios
-        .get(
-          `https://powerful-scrubland-88120.herokuapp.com:4000/api/data/${post.news_id}/downvote`
-        )
+        .get(`/api/data/${post.news_id}/downvote`)
         .then((response) => console.log(response));
       setUpvotes(upvotes - 1); // Update the upvotes state locally
     } catch (error) {

@@ -10,9 +10,7 @@ function LatestArticles() {
   // Define a function to fetch the latest posts from the backend
   const fetchLatestPosts = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "https://powerful-scrubland-88120.herokuapp.com:4000/api/data"
-      );
+      const response = await axios.get("api/data");
       const latestPost = response.data[0];
       if (latestPost.id !== latestPostId) {
         setLatestPostId(latestPost.id);
