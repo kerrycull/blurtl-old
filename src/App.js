@@ -1,5 +1,5 @@
 import React from "react";
-import LatestArticles from "./components/LatestArticles";
+import LatestArticles from "./components/LatestArticles.js";
 import "./App.css";
 
 function App() {
