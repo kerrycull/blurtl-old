@@ -52,7 +52,7 @@ function Article({ post }) {
     try {
       await axios
         .get(
-          `http://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
+          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
         )
         .then((response) => console.log(response));
       setUpvotes(upvotes + 1); // Update the upvotes state locally
@@ -65,7 +65,7 @@ function Article({ post }) {
     try {
       await axios
         .get(
-          `http://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
+          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
         )
         .then((response) => console.log(response));
       setUpvotes(upvotes - 1); // Update the upvotes state locally

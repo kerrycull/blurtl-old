@@ -11,7 +11,7 @@ function LatestArticles() {
   const fetchLatestPosts = useCallback(async () => {
     try {
       const response = await axios.get(
-        "http://blurtl-server-production.up.railway.app/api/data"
+        "https://blurtl-server-production.up.railway.app/api/data"
       );
       const latestPost = response.data[0];
       if (latestPost.id !== latestPostId) {
