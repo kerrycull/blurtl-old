@@ -51,7 +51,9 @@ function Article({ post }) {
   const handleUpvote = async () => {
     try {
       await axios
-        .get(`/api/data/${post.news_id}/upvote`)
+        .get(
+          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
+        )
         .then((response) => console.log(response));
       setUpvotes(upvotes + 1); // Update the upvotes state locally
     } catch (error) {
@@ -62,7 +64,9 @@ function Article({ post }) {
   const handleDownvote = async () => {
     try {
       await axios
-        .get(`/api/data/${post.news_id}/downvote`)
+        .get(
+          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
+        )
         .then((response) => console.log(response));
       setUpvotes(upvotes - 1); // Update the upvotes state locally
     } catch (error) {
