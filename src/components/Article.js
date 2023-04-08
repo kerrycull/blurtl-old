@@ -91,7 +91,7 @@ function Article({ post }) {
         <h3 className="title">{post.title}</h3>
         <p className="dateStamp"> {timeAgoStr}</p>
         <p className="excerpt">{excerpt}</p>
-        <a href={post.news_url} className="link">
+        <a target="_blank" href={post.url} className="link">
           Full article
         </a>
       </div>
