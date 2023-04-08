@@ -10,9 +10,7 @@ function LatestArticles() {
   // Define a function to fetch the latest posts from the backend
   const fetchLatestPosts = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "https://blurtl-server-production.up.railway.app/api/data"
-      );
+      const response = await axios.get("/api/data");
       const latestPost = response.data[0];
       if (latestPost.id !== latestPostId) {
         setLatestPostId(latestPost.id);
@@ -33,6 +31,10 @@ function LatestArticles() {
     const interval = setInterval(fetchLatestPosts, 3 * 60 * 1000);
     return () => clearInterval(interval);
   }, [fetchLatestPosts]);
+
+  useEffect(() => {
+    setPostDisplay(postDisplay);
+  }, [postDisplay]);
 
   return (
     <div className="article-container">

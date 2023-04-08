@@ -4,6 +4,7 @@ const cors = require("cors");
 const axios = require("axios");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "./config.env" });
+const port = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 app.use(require("./routes/record"));
@@ -76,6 +77,16 @@ async function startServer() {
       res.json(posts);
     });
 
+    app.get("/api/data/top", async (req, res) => {
+      const collection = db.collection(collectionName);
+      const posts = await collection
+        .find({})
+        .sort({ upvotes: -1 })
+        .limit(10)
+        .toArray();
+      res.json(posts);
+    });
+
     app.get("/api/data/:news_id/upvote", async (req, res) => {
       const news_id = req.params.news_id;
       const collection = db.collection(collectionName);
@@ -98,8 +109,6 @@ async function startServer() {
       const news_id = req.params.news_id;
       const collection = db.collection(collectionName);
 
-      //console.log(req.params.news_id);
-
       // Find the post with the given news_id and increment its upvotes by 1
       const result = await collection.updateOne(
         { news_id: parseInt(req.params.news_id) },
@@ -112,7 +121,6 @@ async function startServer() {
       res.send(`Post ${news_id} upvoted successfully`);
     });
 
-    const port = process.env.PORT || 5000;
     app.listen(port, () => {
       console.log(`Server is running on port: ${port}`);
     });

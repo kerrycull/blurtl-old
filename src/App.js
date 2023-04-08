@@ -1,20 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LatestArticles from "./components/LatestArticles.js";
+import TopArticles from "./components/TopArticles.js";
+import Navbar from "./components/Navbar.js";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <div className="header">
-        <h2>blurtl</h2>
-        <h5>real-time cryptocurrency news.</h5>
-      </div>
-      <div className="navigation">
-        <h3 className="nongreyed">Latest</h3>
-        <h3 className="greyed">Top</h3>
-        <h3 className="greyed">Rising</h3>
-      </div>
-      <LatestArticles />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<LatestArticles />} />
+          <Route path="/top" element={<TopArticles />} />
+          <Route path="/rising" element={<TopArticles />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

@@ -44,34 +44,10 @@ h5 {
 .greyed {
   color:#333;
   text-decoration: line-through;
-  
 }
 
-.nongreyed {
+.nongreyed:before{
   color: white;
-}
-
-.navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0077b6;
-  padding: 10px 0;
-  border-radius: 8px;
-  width: 80%;
-}
-
-.navigation h3 {
-  margin: 0 15px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  position: relative;
-}
-
-.navigation h3:before {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -84,10 +60,51 @@ h5 {
   transition: transform 0.3s ease;
 }
 
-.navigation h3:hover:before {
+.nongreyed:hover:before {
   transform: scaleX(1);
 }
 
+.top {
+  width: 80%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color:white;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #0077b6;
+  padding: 10px 0;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.navigation h3 {
+  margin: 0 15px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 @media only screen and (max-width: 768px) {
   h2 {
