@@ -68,14 +68,19 @@ h5 {
   width: 80%;
 }
 
-a {
+.navigation a {
   text-decoration: none;
   color:white;
 }
 
-a:visited {
+.navigation a:visited {
   text-decoration:none;
   color:white;
+}
+
+.a {
+  text-decoration: none;
+  color: #0077b6;
 }
 
 .navigation {
