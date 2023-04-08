@@ -10,7 +10,9 @@ function TopArticles() {
   // Define a function to fetch the latest posts from the backend
   const fetchTopPosts = useCallback(async () => {
     try {
-      const response = await axios.get("/api/data/top");
+      const response = await axios.get(
+        "https://blurtl-server-production.up.railway.app/api/data/top"
+      );
       const topPost = response.data[0];
       if (topPost.id !== topPostId) {
         setTopPostId(topPost.id);
