@@ -22,7 +22,7 @@ function TopArticles() {
     } catch (error) {
       console.log("Error fetching top posts:", error);
     }
-  }, [postDisplay.length]);
+  }, [topPostId, postDisplay.length]);
 
   useEffect(() => {
     // Call the 'fetchLatestPosts' function once when the component mounts

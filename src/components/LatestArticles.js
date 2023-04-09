@@ -25,7 +25,7 @@ function LatestArticles() {
     } catch (error) {
       console.log("Error fetching latest posts:", error);
     }
-  }, [postDisplay.length, page]);
+  }, [latestPostId, postDisplay.length, page]);
 
   useEffect(() => {
     // Call the 'fetchLatestPosts' function once when the component mounts
