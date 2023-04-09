@@ -23,8 +23,8 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="">
-                <h3 className="greyed">Rising</h3>
+              <Link to="/rising">
+                <h3 className="nongreyed">Rising</h3>
               </Link>
             </li>
           </ul>
