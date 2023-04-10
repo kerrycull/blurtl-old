@@ -58,7 +58,7 @@
   width: 5%;
 }
 
-button {
+.voteButton {
   background-color: lightgrey;
   border-radius: 5px;
   border: none;

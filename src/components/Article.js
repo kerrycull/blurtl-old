@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Article.css";
 import axios from "axios";
+import { auth } from "/Users/kerry/blurtl-old/src/components/Modal/firebase.js";
 
 // SHORTENS THE EXCERPT TO A CERTAIN LENGTH
 function shortenString(str, length) {
@@ -43,34 +44,44 @@ function Article({ post }) {
 
   const [timeAgoStr, setTimeAgoStr] = useState(timeAgo(post.date));
 
+  //console.log(post.news_id + " --- " + timeAgoStr);
+
   useEffect(() => {
     setUpvotes(post.upvotes || 0);
     setDownvotes(post.downvotes || 0);
   }, [post.upvotes, post.downvotes]);
 
   const handleUpvote = async () => {
-    try {
-      await axios
-        .get(
-          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
-        )
-        .then((response) => console.log(response));
-      setUpvotes(upvotes + 1); // Update the upvotes state locally
-    } catch (error) {
-      console.error(error);
+    if (auth.currentUser !== null) {
+      try {
+        await axios
+          .get(
+            `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
+          )
+          .then((response) => console.log(response));
+        setUpvotes(upvotes + 1); // Update the upvotes state locally
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert("Please sign in to upvote.");
     }
   };
 
   const handleDownvote = async () => {
-    try {
-      await axios
-        .get(
-          `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
-        )
-        .then((response) => console.log(response));
-      setUpvotes(upvotes - 1); // Update the upvotes state locally
-    } catch (error) {
-      console.error(error);
+    if (auth.currentUser !== null) {
+      try {
+        await axios
+          .get(
+            `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
+          )
+          .then((response) => console.log(response));
+        setUpvotes(upvotes - 1); // Update the upvotes state locally
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert("Please sign in to downvote.");
     }
   };
 
@@ -96,9 +107,13 @@ function Article({ post }) {
         </a>
       </div>
       <div className="score-container">
-        <button onClick={handleUpvote}>↑</button>
+        <button className="voteButton" onClick={handleUpvote}>
+          ↑
+        </button>
         <span className="score">{score}</span>
-        <button onClick={handleDownvote}>↓</button>
+        <button className="voteButton" onClick={handleDownvote}>
+          ↓
+        </button>
       </div>
     </div>
   );

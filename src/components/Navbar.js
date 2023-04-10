@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import Modal from "./Modal/Modal.js";
 
 function Navbar() {
   return (
@@ -26,6 +27,9 @@ function Navbar() {
               <Link to="/rising">
                 <h3 className="nongreyed">Rising</h3>
               </Link>
+            </li>
+            <li>
+              <Modal />
             </li>
           </ul>
         </nav>
