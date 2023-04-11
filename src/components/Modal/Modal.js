@@ -40,11 +40,11 @@ const Modal = () => {
     <>
       {currentUser ? (
         <h3 onClick={signOutUser} className="nongreyed">
-          Logout
+          Log out
         </h3>
       ) : (
         <h3 onClick={toggleModal} className="nongreyed">
-          Login
+          Log in
         </h3>
       )}
 

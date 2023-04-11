@@ -42,7 +42,7 @@ const SignInForm = () => {
 
   return (
     <div className="formBox">
-      <h2 className="loginTitle">Login</h2>
+      <h2 className="loginTitle">LOG IN</h2>
       <form className="formClass" onSubmit={handleSubmit}>
         <FormInput
           label="Email"
@@ -64,10 +64,10 @@ const SignInForm = () => {
           value={password}
         />
         <Button className="submitButton" type="submit">
-          Submit
+          SUBMIT
         </Button>
 
-        <h3>Please note that signups are currently disabled.</h3>
+        <h3>Please note that sign ups are currently disabled.</h3>
       </form>
     </div>
   );
