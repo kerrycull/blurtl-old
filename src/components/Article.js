@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Article.css";
 import axios from "axios";
-import { auth } from "/Users/kerry/blurtl-old/src/components/Modal/firebase.js";
+import { auth } from "./Modal/firebase.js";
 
 // SHORTENS THE EXCERPT TO A CERTAIN LENGTH
 function shortenString(str, length) {
