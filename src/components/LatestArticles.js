@@ -17,7 +17,7 @@ function LatestArticles() {
       );
       const latestTenPosts = response.data.slice(0, page * 10);
       const latestPost = latestTenPosts[0];
-      console.log("latest post id: " + latestPost.news_id);
+      console.log("latest post id: " + latestPost.news_id + latestPost.date);
       if (latestPost.news_id !== latestPostId || page !== 1) {
         console.log("updating postDisplay");
         setLatestPostId(latestPost.news_id);
@@ -28,6 +28,7 @@ function LatestArticles() {
     }
   }, [latestPostId, page]);
 
+
   useEffect(() => {
     // Call the 'fetchLatestPosts' function once when the component mounts
     fetchLatestPosts();
@@ -35,7 +36,7 @@ function LatestArticles() {
 
   // Call the 'fetchLatestPosts' function every 3 minutes
   useEffect(() => {
-    const interval = setInterval(fetchLatestPosts, 1.5 * 60 * 1000);
+    const interval = setInterval(fetchLatestPosts, 3 * 60 * 1000);
     return () => clearInterval(interval);
   }, [fetchLatestPosts]);
 

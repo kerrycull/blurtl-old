@@ -42,7 +42,7 @@ function Article({ post }) {
   const [downvotes, setDownvotes] = useState(post.downvotes || 0);
   const score = upvotes - downvotes;
 
-  const [timeAgoStr, setTimeAgoStr] = useState(timeAgo(post.date));
+  const [timeAgoStr, setTimeAgoStr] = useState("");
 
   //console.log(post.news_id + " --- " + timeAgoStr);
 
@@ -87,6 +87,7 @@ function Article({ post }) {
 
   // Update the time every minute
   useEffect(() => {
+    setTimeAgoStr(timeAgo(post.date));
     const intervalId = setInterval(() => {
       const newTimeAgoStr = timeAgo(post.date);
       setTimeAgoStr(newTimeAgoStr);

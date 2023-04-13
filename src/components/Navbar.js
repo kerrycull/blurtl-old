@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import Modal from "./Modal/Modal.js";
+import CryptoWidget from "./CryptoWidget.js";
 
 function Navbar() {
   return (
     <div className="top">
+
+<CryptoWidget/>
       <div className="header">
         <h2>blurtl</h2>
         <h5>real-time cryptocurrency news.</h5>

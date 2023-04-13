@@ -2,6 +2,7 @@
   max-width: 80%;
   min-width: 80%;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .articleBox {
@@ -11,7 +12,7 @@
 }
 
 .article {
-  margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -28,18 +29,20 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #0077b6;
   margin-top: 0px;
+  user-select: none;
 }
 
 .excerpt {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   margin-bottom: 20px;
   color: #555;
+  user-select: none;
 }
 
 .score-container {
@@ -50,7 +53,7 @@
   text-align:center;
   background-color: #fff;
   margin-left: 20px;
-  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -66,20 +69,23 @@
   padding: 5px;
   margin: 5px;
   width: 25px;
+  user-select: none;
 }
 
 .score {
   font-size: 20px;
   font-weight: bold;
+  user-select: none;
 }
 
 .link {
-  font-size: 14px;
+  font-size: 12px;
   color: #0077b6;
   text-decoration: none;
   display: inline-block;
   transition: border-bottom 0.3s ease-in-out;
-  margin-top: 20px;
+  margin-top: 10px;
+  user-select: none;
 }
 
 .link:hover {
@@ -89,4 +95,6 @@
 .dateStamp {
   color: rgb(164, 164, 164);
   margin: 0px;
+  font-size: 12px;
+  user-select: none;
 }
