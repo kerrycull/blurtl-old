@@ -60,7 +60,9 @@ function CryptoWidget() {
           <div className="price-container">
             <h3>{ticker.currency}</h3>
             <ul className="price-list">
-              {prices && (
+              {!prices ? (
+                <li>0.00</li>
+              ) : (
                 <li>{formatPrice(Object.values(prices[index])[0])}</li>
               )}
             </ul>
