@@ -49,14 +49,14 @@ body.active-modal {
 }
 
 .nongreyed:before{
-    color: white;
+    color: #e4e4e4;
     content: "";
     position: absolute;
     bottom: -10px;
     left: 0;
     height: 2px;
     width: 100%;
-    background-color: white;
+    background-color: #e4e4e4;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -67,7 +67,7 @@ body.active-modal {
   }
 
   .nongreyed {
-    color: white;
+    color: #e4e4e4;
     margin: 0 15px;
     font-size: 1.2rem;
     font-weight: 500;
@@ -87,7 +87,7 @@ body.active-modal {
     height: 30px;
     cursor: pointer;
     background-color: #0077b6;
-    color: white;
+    color: #e4e4e4;
     border-radius: 5px;
     border: none;
   }

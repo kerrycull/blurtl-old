@@ -2,41 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import Modal from "./Modal/Modal.js";
-import CryptoWidget from "./CryptoWidget.js";
+import Footer from "./Footer.js";
+import logo from "../images/logo.png";
 
 function Navbar() {
   return (
     <div className="top">
-
-<CryptoWidget/>
-      <div className="header">
-        <h2>blurtl</h2>
-        <h5>real-time cryptocurrency news.</h5>
-      </div>
       <div className="navigation">
+      <img className="logo" src={logo} width='30px'/>
         <nav>
           <ul>
-            <li>
-              <Link to="/">
-                <h3 className="nongreyed">Latest</h3>
-              </Link>
-            </li>
-            <li>
-              <Link to="/top">
-                <h3 className="nongreyed">Top</h3>
-              </Link>
-            </li>
-            <li>
-              <Link to="/rising">
-                <h3 className="nongreyed">Rising</h3>
-              </Link>
-            </li>
             <li>
               <Modal />
             </li>
           </ul>
         </nav>
       </div>
+      < Footer/>
     </div>
   );
 }

@@ -3,26 +3,25 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-right: 50px;
-  padding-left: 50px;
-  background-color:  #0077b6;
-  color: white;
-  margin-bottom: 20px;
+  color: #e4e4e4;
   user-select: none;
+  width: 100%;
+  overflow: hidden;
 }
 
 .price-list-container h3 {
   font-size: 0.8rem;
   margin-bottom: 5px;
-  color: lightgrey;
+  margin-top: 0;
+  color: #e4e4e4;
 }
 
 .price-list-container > div {
   text-align: center;
-  position: relative; 
-  border-right: 1px solid white;
+  border-right: 1px solid #3a3a3a;
   padding: 10px;
   padding-top: 0px;
+  padding-bottom: 0px;
   
 }
 
@@ -30,13 +29,8 @@
   border-right: none;
 }
 
-.price-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .price-list li {
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -4,6 +4,7 @@ import LatestArticles from "./components/LatestArticles.js";
 import TopArticles from "./components/TopArticles.js";
 import RisingArticles from "./components/RisingArticles.js";
 import Navbar from "./components/Navbar.js";
+import Sidebar from "./components/Sidebar.js";
 import "./App.css";
 
 function App() {
@@ -11,12 +12,16 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
+        <div className="mainsec">
+        <Sidebar />
         <Routes>
           <Route exact path="/" element={<LatestArticles />} />
           <Route path="/top" element={<TopArticles />} />
           <Route path="/rising" element={<RisingArticles />} />
         </Routes>
+        </div>
       </Router>
+      
     </div>
   );
 }
