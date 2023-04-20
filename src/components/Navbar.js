@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../App.css";
 import Modal from "./Modal/Modal.js";
 import Footer from "./Footer.js";
