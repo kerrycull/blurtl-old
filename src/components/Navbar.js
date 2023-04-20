@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <div className="top">
       <div className="navigation">
-      <img className="logo" src={logo} width='30px'/>
+      <img className="logo" src={logo} width='30px' alt="blurtl"/>
         <nav>
           <ul>
             <li>
