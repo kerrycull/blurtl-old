@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Modal.css";
 
-import { signOutUser, auth, onAuthStateChangedListener } from "./firebase.js";
+import { auth, onAuthStateChangedListener } from "./firebase.js";
 
 import SignInForm from "./SignInForm.js";
 
@@ -22,7 +22,7 @@ const PopupModalDown = () => {
   }
 
   const checkUser = () => {
-    if (auth.currentUser === null) {
+    if (currentUser === null) {
       toggleModal();
     }
   }
