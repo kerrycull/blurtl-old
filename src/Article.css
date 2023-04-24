@@ -64,23 +64,12 @@
   width: 5%;
 }
 
-.voteButton {
-  background-color: lightgrey;
-  color: #1d1d1d;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  margin: 5px;
-  width: 25px;
-  user-select: none;
-}
-
 .score {
   font-size: 20px;
   font-weight: bold;
   user-select: none;
   color: #e4e4e4;
+  padding: 5px;
 }
 
 .link {
@@ -102,4 +91,9 @@
   margin: 0px;
   font-size: 12px;
   user-select: none;
+}
+
+.voteDiv {
+  width: 25px;
+  height: 25px;
 }

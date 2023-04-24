@@ -3,6 +3,9 @@ import "../Article.css";
 import axios from "axios";
 import { auth } from "./Modal/firebase.js";
 
+import PopupModalUp from "./Modal/PopupModaUp.js";
+import PopupModalDown from "./Modal/PopupModaDown.js";
+
 // SHORTENS THE EXCERPT TO A CERTAIN LENGTH
 function shortenString(str, length) {
   if (str.length > 200) {
@@ -64,7 +67,7 @@ function Article({ post }) {
         console.error(error);
       }
     } else {
-      alert("Please sign in to upvote.");
+      console.log("user not signed in");
     }
   };
 
@@ -81,7 +84,7 @@ function Article({ post }) {
         console.error(error);
       }
     } else {
-      alert("Please sign in to downvote.");
+      console.log("user not signed in");
     }
   };
 
@@ -108,13 +111,13 @@ function Article({ post }) {
         </a>
       </div>
       <div className="score-container">
-        <button className="voteButton" onClick={handleUpvote}>
-          ↑
-        </button>
+        <div className="voteDiv" onClick={handleUpvote}>
+          <PopupModalUp/>
+        </div>
         <span className="score">{score}</span>
-        <button className="voteButton" onClick={handleDownvote}>
-          ↓
-        </button>
+        <div className="voteDiv" onClick={handleDownvote}>
+          <PopupModalDown/>
+        </div>
       </div>
     </div>
   );

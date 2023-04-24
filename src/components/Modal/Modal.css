@@ -106,3 +106,19 @@ body.active-modal {
 
     pointer-events: cursor;
   }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .voteButton {
+  background-color: lightgrey;
+  color: #1d1d1d;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  width: 25px;
+  user-select: none;
+}
