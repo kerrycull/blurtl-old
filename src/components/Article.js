@@ -61,7 +61,7 @@ function Article({ post }) {
           user_id: auth.currentUser.uid,
         });
         console.log(response);
-        if (response.data == "upvote") {
+        if (response.data === "upvote") {
           setUpvotes(upvotes + 1);
         } else {
           console.log("no response");
@@ -80,7 +80,7 @@ function Article({ post }) {
         const response = await axios.post(`/api/data/${post.news_id}/downvote`, {
           user_id: auth.currentUser.uid,
         });
-        if (response.data == "downvote") {
+        if (response.data === "downvote") {
           setDownvotes(downvotes + 1);
         } else {
           console.log("no response");

@@ -41,7 +41,7 @@ const SignUpForm = () => {
       return;
     }
     } catch (error) {
-      console.log("user sign up failed", error);
+      alert("User already exists");
     }
   };
 
