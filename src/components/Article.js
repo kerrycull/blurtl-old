@@ -57,7 +57,7 @@ function Article({ post }) {
   const handleUpvote = async () => {
     if (auth.currentUser !== null) {
       try {
-        const response = await axios.post(`/api/data/${post.news_id}/upvote`, {
+        const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`, {
           user_id: auth.currentUser.uid,
         });
         console.log(response);
@@ -77,7 +77,7 @@ function Article({ post }) {
   const handleDownvote = async () => {
     if (auth.currentUser !== null) {
       try {
-        const response = await axios.post(`/api/data/${post.news_id}/downvote`, {
+        const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`, {
           user_id: auth.currentUser.uid,
         });
         if (response.data === "downvote") {
