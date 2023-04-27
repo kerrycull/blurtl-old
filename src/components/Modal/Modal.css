@@ -29,8 +29,8 @@ body.active-modal {
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
-    background: #f1f1f1;
-    padding: 14px 28px;
+    background: #e4e4e4;
+    padding: 40px;
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
@@ -38,6 +38,7 @@ body.active-modal {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    height: 185px;
 }
 
 
@@ -83,7 +84,20 @@ body.active-modal {
   
   .submitButton {
     margin: 10px;
-    width: 30%;
+    width: 100x;
+    height: 30px;
+    cursor: pointer;
+    background-color: #0077b6;
+    color: #e4e4e4;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .submitButton2 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 85px;
     height: 30px;
     cursor: pointer;
     background-color: #0077b6;
@@ -121,4 +135,26 @@ body.active-modal {
   padding: 5px;
   width: 25px;
   user-select: none;
+}
+
+.formBox {
+  width: 80%;
+}
+
+.accountLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  width: 30px;
+  height: 30px;
+  color: #e4e4e4;
+  text-align: center;
+}
+
+.settingsBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

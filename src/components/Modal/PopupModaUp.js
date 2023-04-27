@@ -4,10 +4,17 @@ import "./Modal.css";
 import { auth, onAuthStateChangedListener } from "./firebase.js";
 
 import SignInForm from "./SignInForm.js";
+import SignUpForm from "./SignUpForm.js";
+import SettingsForm from "./SettingsForm.js";
 
 const PopupModalUp = () => {
   const [modal, setModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
+  const [showSignIn, setShowSignIn] = useState(true);
+
+  const handleToggle = () => {
+    setShowSignIn(!showSignIn);
+  };
 
   const toggleModal = () => {
     setModal(!modal);
@@ -21,13 +28,11 @@ const PopupModalUp = () => {
     document.body.classList.remove("active-modal");
   }
 
-
   const checkUser = () => {
     if (currentUser === null) {
       toggleModal();
     }
   }
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(() => {
@@ -44,18 +49,30 @@ const PopupModalUp = () => {
   }, []);
 
   return (
-    <>
+    <>   
       <button className="voteButton" onClick={checkUser}>
-        ↑    
+        ↑   
       </button>
+
       {modal && (
         <div className="modal">
           <div className="overlay">
             <div className="modal-content">
-              <SignInForm />
+              {currentUser ? (
+                <SettingsForm />
+              ) : (
+                showSignIn ? <SignInForm /> : <SignUpForm />
+              )}
+
               <button className="close-modal" onClick={toggleModal}>
                 X
               </button>
+
+              {!currentUser && (
+                <button onClick={handleToggle} className="submitButton2">
+                  {showSignIn ? 'SIGN UP' : 'LOG IN' }
+                </button>
+              )}
             </div>
           </div>
         </div>

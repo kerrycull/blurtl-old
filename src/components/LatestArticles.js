@@ -13,7 +13,7 @@ function LatestArticles() {
     console.log("fetching latest posts... for page " + page + "");
     try {
       const response = await axios.get(
-        "https://blurtl-server-production.up.railway.app/api/data"
+        "/api/data"
       );
       const latestTenPosts = response.data.slice(0, page * 10);
       const latestPost = latestTenPosts[0];

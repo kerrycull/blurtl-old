@@ -57,37 +57,41 @@ function Article({ post }) {
   const handleUpvote = async () => {
     if (auth.currentUser !== null) {
       try {
-        await axios
-          .get(
-            `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`
-          )
-          .then((response) => console.log(response));
-        setUpvotes(upvotes + 1); // Update the upvotes state locally
+        const response = await axios.post(`/api/data/${post.news_id}/upvote`, {
+          user_id: auth.currentUser.uid,
+        });
+        console.log(response);
+        if (response.data == "upvote") {
+          setUpvotes(upvotes + 1);
+        } else {
+          console.log("no response");
+        }
       } catch (error) {
         console.error(error);
       }
     } else {
-      console.log("user not signed in");
+      console.log('user not signed in');
     }
   };
 
   const handleDownvote = async () => {
     if (auth.currentUser !== null) {
       try {
-        await axios
-          .get(
-            `https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/downvote`
-          )
-          .then((response) => console.log(response));
-        setUpvotes(upvotes - 1); // Update the upvotes state locally
+        const response = await axios.post(`/api/data/${post.news_id}/downvote`, {
+          user_id: auth.currentUser.uid,
+        });
+        if (response.data == "downvote") {
+          setDownvotes(downvotes + 1);
+        } else {
+          console.log("no response");
+        }
       } catch (error) {
         console.error(error);
       }
     } else {
-      console.log("user not signed in");
+      console.log('user not signed in');
     }
   };
-
   // Update the time every minute
   useEffect(() => {
     setTimeAgoStr(timeAgo(post.date));

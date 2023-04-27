@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Modal.css";
 
-import { signOutUser, auth, onAuthStateChangedListener } from "./firebase.js";
+import { auth, onAuthStateChangedListener } from "./firebase.js";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 import SignInForm from "./SignInForm.js";
+import SignUpForm from "./SignUpForm.js";
+import SettingsForm from "./SettingsForm.js";
+
 
 const Modal = () => {
   const [modal, setModal] = useState(false);
@@ -21,6 +27,13 @@ const Modal = () => {
     document.body.classList.remove("active-modal");
   }
 
+  const [showSignIn, setShowSignIn] = useState(true);
+
+  const handleToggle = () => {
+    setShowSignIn(!showSignIn);
+  };
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(() => {
       if (auth.currentUser) {
@@ -35,33 +48,45 @@ const Modal = () => {
 
     return unsubscribe;
   }, []);
-
+  
   return (
     <>
-      {currentUser ? (
-        <h3 onClick={signOutUser} className="nongreyed">
-          Log out
-        </h3>
-      ) : (
-        <h3 onClick={toggleModal} className="nongreyed">
-          Log in
-        </h3>
+      {(
+        <div onClick={toggleModal} className="accountLogo" >
+          <FontAwesomeIcon icon={faUser} />
+        </div>
       )}
 
       {modal && (
         <div className="modal">
           <div className="overlay">
             <div className="modal-content">
-              <SignInForm />
+              {currentUser ? (
+                <SettingsForm />
+              ) : (
+                showSignIn ? <SignInForm /> : <SignUpForm />
+              )}
+
               <button className="close-modal" onClick={toggleModal}>
                 X
               </button>
+
+              {!currentUser && (
+                <button onClick={handleToggle} className="submitButton2">
+                  {showSignIn ? 'SIGN UP' : 'LOG IN' }
+                </button>
+              )}
             </div>
           </div>
         </div>
       )}
     </>
   );
+
 };
 
+
+
 export default Modal;
+
+            //{currentUser ? ( <SignUpForm />) : ( <SignInForm />) }

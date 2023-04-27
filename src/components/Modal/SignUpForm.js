@@ -4,17 +4,18 @@ import "./Modal.css";
 import logo from "./logo.png"
 import Button from "./Button.js";
 
-import { signInAuthUserWithEmailAndPassword, auth } from "./firebase.js";
+import { signInAuthUserWithEmailAndPassword, createAuthUserWithEmailAndPassword, auth } from "./firebase.js";
 
 import FormInput from "./FormInput.js";
 const defaultFormFields = {
   email: "",
   password: "",
+  passwordConfirm: "",
 };
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+  const { email, password, passwordConfirm } = formFields;
   //const user = auth.currentUser;
 
   const resetFormFields = () => {
@@ -25,13 +26,22 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password).then(() => {
+      if (password !== passwordConfirm) {
+        alert("Passwords don't match");
+        return;
+      } else if (password.length >= 6) {
+      await createAuthUserWithEmailAndPassword(email, password).then(() => {
         console.log("signing in " + auth.currentUser.email);
+        signInAuthUserWithEmailAndPassword(email, password);
         //alert("Signed in as " + auth.currentUser.email);
+        resetFormFields();
       });
-      resetFormFields();
+    } else {
+      alert("Password must be at least 6 characters");
+      return;
+    }
     } catch (error) {
-      console.log("user sign in failed", error);
+      console.log("user sign up failed", error);
     }
   };
 
@@ -64,8 +74,18 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
+        
+        <FormInput
+          label="PasswordConfirm"
+          type="password"
+          placeholder="Confirm password"
+          required
+          onChange={handleChange}
+          name="passwordConfirm"
+          value={passwordConfirm}
+        />
         <Button className="submitButton" type="submit">
-          LOG IN
+          SIGN UP
         </Button>
 
       </form>
@@ -73,4 +93,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
