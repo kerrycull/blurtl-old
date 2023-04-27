@@ -11,7 +11,13 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
 
+button {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 body {
@@ -150,6 +156,7 @@ h5 {
   align-items: center; 
   justify-content: center;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .side {
