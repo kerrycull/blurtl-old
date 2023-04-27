@@ -6,6 +6,11 @@
   background-color: #1d1d1d;
 }
 
+input[type=text], input[type=button] {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  }
+  
 body {
   margin: 0;
   padding: 0;
