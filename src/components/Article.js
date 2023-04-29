@@ -68,7 +68,7 @@ function Article({ post }) {
   
   useEffect(() => {
     fetchPostVotes();
-  }, []);
+  }, [fetchPostVotes]);
 
   const handleUpvote = async () => {
     if (auth.currentUser !== null) {
