@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useCallback} from "react";
 import "../Article.css";
 import axios from "axios";
 import { auth } from "./Modal/firebase.js";
@@ -49,7 +49,7 @@ function Article({ post }) {
 
   const [responseType, setResponseType] = useState("");
 
-  const fetchPostVotes = async () => {
+  const fetchPostVotes = useCallback(async () => {
     try {
       const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/votes`, {
         user_id: auth.currentUser.uid,
@@ -59,7 +59,7 @@ function Article({ post }) {
     } catch (error) {
       console.error(error);
     }
-  };
+  });
 
   useEffect(() => {
     setUpvotes(post.upvotes || 0);
