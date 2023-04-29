@@ -59,7 +59,7 @@ function Article({ post }) {
     } catch (error) {
       console.error(error);
     }
-  });
+  }, [post]);
 
   useEffect(() => {
     setUpvotes(post.upvotes || 0);
