@@ -5,7 +5,7 @@ import CryptoWidget from "./CryptoWidget.js";
 function Footer() {
   return (
     <div className="footer">
-        <CryptoWidget />
+
     </div>
   );
 }

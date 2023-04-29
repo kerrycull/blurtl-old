@@ -95,6 +95,31 @@
 }
 
 .voteDiv {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
   width: 25px;
   height: 25px;
+  user-select: none;
+  background-color: lightgrey;
+}
+
+.voteDivDown {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  user-select: none;
+  background-color: darkgrey;
+}
+
+.voteDivUp {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  user-select: none;
+  background-color: darkgrey;
 }

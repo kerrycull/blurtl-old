@@ -128,7 +128,7 @@ body.active-modal {
   }
 
   .voteButton {
-  background-color: lightgrey;
+  background-color: rgba(49,49,49, 0);
   color: #1d1d1d;
   border-radius: 5px;
   border: none;

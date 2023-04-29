@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback} from "react";
 import "../Article.css";
 import axios from "axios";
 import { auth } from "./Modal/firebase.js";
@@ -47,12 +47,28 @@ function Article({ post }) {
 
   const [timeAgoStr, setTimeAgoStr] = useState("");
 
-  //console.log(post.news_id + " --- " + timeAgoStr);
+  const [responseType, setResponseType] = useState("");
+
+  const fetchPostVotes = async () => {
+    try {
+      const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/votes`, {
+        user_id: auth.currentUser.uid,
+      });
+      console.log(response.data);
+      setResponseType(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     setUpvotes(post.upvotes || 0);
     setDownvotes(post.downvotes || 0);
   }, [post.upvotes, post.downvotes]);
+  
+  useEffect(() => {
+    fetchPostVotes();
+  }, []);
 
   const handleUpvote = async () => {
     if (auth.currentUser !== null) {
@@ -60,10 +76,13 @@ function Article({ post }) {
         const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/upvote`, {
           user_id: auth.currentUser.uid,
         });
-        console.log(response);
         if (response.data === "upvote") {
           setUpvotes(upvotes + 1);
-        } else {
+          setResponseType("upvote");
+          console.log("upvoted");
+        } else if (response.data === "upvote2") {
+          setUpvotes(upvotes + 1);
+          setResponseType("noresponse");
           console.log("no response");
         }
       } catch (error) {
@@ -82,7 +101,11 @@ function Article({ post }) {
         });
         if (response.data === "downvote") {
           setDownvotes(downvotes + 1);
-        } else {
+          setResponseType("downvote");
+          console.log("downvoted");
+        } else if (response.data === "downvote2") {
+          setDownvotes(downvotes + 1);
+          setResponseType("noresponse");
           console.log("no response");
         }
       } catch (error) {
@@ -92,6 +115,7 @@ function Article({ post }) {
       console.log('user not signed in');
     }
   };
+
   // Update the time every minute
   useEffect(() => {
     setTimeAgoStr(timeAgo(post.date));
@@ -115,12 +139,18 @@ function Article({ post }) {
         </a>
       </div>
       <div className="score-container">
-        <div className="voteDiv" onClick={handleUpvote}>
-          <PopupModalUp/>
+      <div
+          className={responseType === "upvote" ? "voteDivUp" : "voteDiv"}
+          onClick={handleUpvote}
+        >
+          <PopupModalUp />
         </div>
         <span className="score">{score}</span>
-        <div className="voteDiv" onClick={handleDownvote}>
-          <PopupModalDown/>
+        <div
+          className={responseType === "downvote" ? "voteDivDown" : "voteDiv"}
+          onClick={handleDownvote}
+        >
+          <PopupModalDown />
         </div>
       </div>
     </div>
