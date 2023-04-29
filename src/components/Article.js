@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback} from "react";
+import React, { useEffect, useState} from "react";
 import "../Article.css";
 import axios from "axios";
 import { auth } from "./Modal/firebase.js";
