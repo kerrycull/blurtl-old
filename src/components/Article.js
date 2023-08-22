@@ -26,7 +26,9 @@ function timeAgo(dateString) {
 
   if (diffMins < 1) {
     return "just now";
-  } else if (diffMins < 60) {
+  } else if (diffMins === 1) {
+    return diffMins + " minute ago";
+  }else if (diffMins < 60) {
     return diffMins + " minutes ago";
   } else if (diffHours === 1) {
     return "1 hour ago";
@@ -50,14 +52,16 @@ function Article({ post }) {
   const [responseType, setResponseType] = useState("");
 
   const fetchPostVotes = useCallback(async () => {
-    try {
-      const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/votes`, {
-        user_id: auth.currentUser.uid,
-      });
-      console.log(response.data);
-      setResponseType(response.data);
-    } catch (error) {
-      console.error(error);
+    if (auth.currentUser != null) {
+      try {
+        const response = await axios.post(`https://blurtl-server-production.up.railway.app/api/data/${post.news_id}/votes`, {
+          user_id: auth.currentUser.uid,
+        });
+        console.log(response.data);
+        setResponseType(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [post]);
 
