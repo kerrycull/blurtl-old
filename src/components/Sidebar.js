@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+
 function Sidebar() {
   return (
     <div className="side">
@@ -24,7 +27,9 @@ function Sidebar() {
             </li>
             <li>
               <Link to="https://wwww.blurtl.beehiiv.com/subscribe">
-                <h3 className="nongreyed">Newsletter</h3>
+                <h3 className="nongreyed">
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </h3>
               </Link>
             </li>
           </ul>
