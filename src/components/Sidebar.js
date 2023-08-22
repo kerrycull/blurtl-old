@@ -27,9 +27,9 @@ function Sidebar() {
             </li>
             <li>
               <Link to="https://blurtl.beehiiv.com/subscribe">
-                <h3 className="nongreyed">
+                <h2 className="nongreyed">
                   <FontAwesomeIcon icon={faEnvelope} />
-                </h3>
+                </h2>
               </Link>
             </li>
           </ul>
