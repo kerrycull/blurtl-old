@@ -22,6 +22,11 @@ function Sidebar() {
                 <h3 className="nongreyed">Rising</h3>
               </Link>
             </li>
+            <li>
+              <Link to="https://wwww.blurtl.beehiiv.com/subscribe">
+                <h3 className="nongreyed">Newsletter</h3>
+              </Link>
+            </li>
           </ul>
         </nav>
     </div>
