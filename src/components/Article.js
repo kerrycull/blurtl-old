@@ -135,12 +135,17 @@ function Article({ post }) {
   return (
     <div className="articleBox">
       <div className="article">
+      <div className="imageBox">
+        <img className="imageTest" src={`${post.image}`} ></img>
+      </div>
+      <div className="detailsBox">
         <h3 className="title">{post.title}</h3>
         <p className="dateStamp"> {timeAgoStr}</p>
         <p className="excerpt">{excerpt}</p>
         <a target="_blank" rel="noreferrer" href={post.url} className="link">
           Full article
         </a>
+      </div>
       </div>
       <div className="score-container">
       <div
