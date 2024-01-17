@@ -34,13 +34,13 @@
 }
 
 .detailsBox {
-  width: 80%;
+  max-width: 80%;
   height: 100%;
 }
 
 .imageBox {
-  width: 20%;
   min-width: 200px;
+  max-width: 20%;
   overflow: hidden;
   margin-right: 20px;
   text-align: center;
