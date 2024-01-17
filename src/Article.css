@@ -34,6 +34,7 @@
 
 .imageBox {
   width: 20%;
+  min-width: 200px;
   overflow: hidden;
   margin-right: 20px;
   text-align: center;
