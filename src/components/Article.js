@@ -136,7 +136,7 @@ function Article({ post }) {
     <div className="articleBox">
       <div className="article">
       <div className="imageBox">
-        <img className="imageTest" src={`${post.image}`} alt="Photo unavailable."></img>
+        <img className="imageTest" src={`${post.image}`} alt="Unavailable"></img>
       </div>
       <div className="detailsBox">
         <h3 className="title">{post.title}</h3>
